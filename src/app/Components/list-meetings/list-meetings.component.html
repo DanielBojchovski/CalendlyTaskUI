@@ -1,0 +1,47 @@
+@if(token?.sub === userId){
+  <h2 class="m-2">My Metings</h2>
+}
+@else {
+  <button class="btn btn-outline-primary my-5 mx-2" type="button" [routerLink]="'/book-meeting/' + userId + '/' + username">Book meeting with {{username}}</button>
+}
+<button class="btn btn-outline-info my-5 mx-2" type="button" routerLink="/">Go back</button>
+
+<div class="row">
+    @for(meeting of meetings; track $index){
+        <div class="mx-auto col-12 col-sm-6 col-md-4 col-lg-3 mx-2">
+            <div class="shadow-lg card text-bg-warning mb-3" style="max-width: 18rem;">
+                <div class="card-header">{{meeting.name}}</div>
+                <div class="card-body">
+                  <h5 class="card-title">Start: {{formatDateTimeOffset(meeting.startDateTime)}}</h5>
+                  <p class="card-text">Duration: {{meeting.durationInMinutes}} min</p>
+                  <p class="card-text">Reason: {{meeting.reason}}</p>
+                  <p class="card-text">Initiator: {{meeting.initiatorFullName ?? "Unknown"}}</p>
+                </div>
+                <div class="card-footer">
+                  @if(token?.sub === userId){
+                    <button class="btn btn-outline-danger w-100" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="selectedMeeting = meeting">Delete</button>
+                  }
+                </div>
+              </div>
+        </div>
+    }
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Meeting</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="selectedMeeting = null"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete this meet?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="selectedMeeting = null">Cancel</button>
+          <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="Delete()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>

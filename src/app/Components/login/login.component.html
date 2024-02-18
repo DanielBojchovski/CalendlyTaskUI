@@ -1,0 +1,16 @@
+<div class="m-5">
+    
+    <div class="form-outline mb-4 col-12 col-sm-6">
+        <label class="form-label" for="form2Example1">Username</label>
+        <input type="text" id="form2Example1" class="form-control" [(ngModel)]="request.userName" />
+    </div>
+
+    <div class="form-outline mb-4 col-12 col-sm-6">
+        <label class="form-label" for="form2Example2">Password</label>
+        <input type="password" id="form2Example2" class="form-control" [(ngModel)]="request.password" />
+    </div>
+
+    <button type="button" class="btn btn-primary btn-block mb-4" (click)="Login()">Login</button>
+    
+</div>
+  

@@ -1,0 +1,8 @@
+<p class="fs-5 m-5">Select which user should have admin privilege</p>
+
+<select class="ms-5 w-50 form-select form-select-lg mb-3 col-12 col-mg-6" [(ngModel)]="selectedUserId" (click)="Redirect()">
+    <option selected disabled value="">Select User</option>
+    @for(option of userOptions; track $index){
+        <option [value]="option.id">{{option.name}}</option>
+    }
+  </select>

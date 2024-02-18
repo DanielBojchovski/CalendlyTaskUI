@@ -1,0 +1,40 @@
+<h3 class="m-5">Book meeting with <strong>{{username}}</strong></h3>
+
+<div class="m-5">
+
+    <div class="form-outline mb-2 col-12 col-sm-6">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" [(ngModel)]="request.name" />
+    </div>
+
+    <div class="form-outline mb-2 col-12 col-sm-6">
+        <label class="form-label">Duration</label>
+        <select class="form-select form-select-lg mb-3 col-12 col-mg-6" [(ngModel)]="request.durationInMinutes">
+            <option selected [value]="5">5 min</option>
+            <option [value]="10">10 min</option>
+            <option [value]="15">15 min</option>
+            <option [value]="20">20 min</option>
+            <option [value]="30">30 min</option>
+            <option [value]="60">1 hour</option>
+            <option [value]="90">1.5 hour</option>
+            <option [value]="120">2 hours</option>
+          </select>
+    </div>
+
+    <div class="form-outline mb-2 col-12 col-sm-6">
+        <label class="form-label">Start date time</label>
+        <input type="datetime-local" class="form-control" [(ngModel)]="request.startDateTime" />
+    </div>
+
+    <div class="form-outline mb-2 col-12 col-sm-6">
+        <label class="form-label">Reason</label>
+        <select class="form-select form-select-lg mb-3 col-12 col-mg-6" [(ngModel)]="request.reason">
+            <option selected value="Personal">Personal</option>
+            <option value="Business">Business</option>
+            <option value="I would rather not say">I would rather not say</option>
+          </select>
+    </div>
+
+    <button class="btn btn-warning my-5 mx-2" type="button" (click)="Save()">Save</button>
+    <button class="btn btn-info my-5 mx-2" type="button" routerLink="/">Go back</button>
+</div>
