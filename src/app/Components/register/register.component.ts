@@ -43,6 +43,13 @@ export class RegisterComponent {
       return;
     }
 
+    for(let i = 0; i < this.request.userName.length; i++){
+      if(this.request.userName[i] === " "){
+        this.toastr.error("Invalid username. Username can not contain spaces");
+        return;
+      }
+    }
+
     if(this.request.email.trim() === ""){
       this.toastr.error("Email is required");
       return;

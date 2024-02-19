@@ -15,11 +15,15 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideAnimationsAsync(),
     provideAnimationsAsync(),
-    provideToastr(),
+    provideToastr({
+              timeOut: 2000,
+              positionClass: 'toast-bottom-right',
+             }),
     provideHttpClient(withInterceptors([
         authInterceptor
     ])),
-    DatePipe, provideServiceWorker('ngsw-worker.js', {
+    DatePipe, 
+    provideServiceWorker('ngsw-worker.js', {
         enabled: !isDevMode(),
         registrationStrategy: 'registerWhenStable:30000'
     })]
