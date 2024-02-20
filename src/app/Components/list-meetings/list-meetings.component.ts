@@ -9,11 +9,12 @@ import { ToastrService } from 'ngx-toastr';
 import { DeleteMeetingRequest } from '../../DTOs/Requests/DeleteMeetingRequest';
 import { JWTService } from '../../Services/jwt.service';
 import { JWTModel } from '../../DTOs/Models/JWTModel';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-list-meetings',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   templateUrl: './list-meetings.component.html',
   styleUrl: './list-meetings.component.css'
 })
@@ -35,6 +36,8 @@ export class ListMeetingsComponent implements OnInit {
 
   token: JWTModel | null = null;
 
+  timezone = 0;
+
   ngOnInit(): void {
     this.activatedRoute.paramMap
       .pipe(take(1)).subscribe({
@@ -53,9 +56,16 @@ export class ListMeetingsComponent implements OnInit {
 
       this.token = this.jwtService.decodeToken();
   }
+
+  AdjustTimeZone(date: Date, hours: number) {
+    date.setTime(date.getTime() + (hours * 60 * 60 * 1000))
+
+    return date;
+  }
  
   formatDateTimeOffset(date : Date) {
-    return this.datePipe.transform(date, 'HH:mm dd-MM-yyyy');
+    const utcDate = this.AdjustTimeZone(new Date(date), this.timezone);
+    return this.datePipe.transform(utcDate, 'HH:mm dd-MM-yyyy');
   }
 
   Delete(){
